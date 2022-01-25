@@ -1,0 +1,48 @@
+thon3 manage.py shell
+Python 3.8.10 (default, Jun  4 2021, 15:09:15) 
+[GCC 7.5.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from polls.models import Question, Choice
+>>> Question.objects.all()
+<QuerySet [<Question: ¿Cual es el mejor curso de platzi?>]>
+>>> from django.utils import timezone
+>>> from django.utils import timezone
+<Question: ¿Cual es el mejor curso de platzi?>
+>>> Question(question_text="¿Quien es el mejor profesor de platzi?", pub_date=timezone.now()).save()
+>>> Question(question_text="¿Cual es la mejor escuela de platzi?", pub_date=timezone.now()).save()
+
+
+para obtener un busqueda
+
+Question.objects.get()
+
+Question: ¿Cual es la mejor escuela de platzi?>]>
+>>> Question.objects.get(pk=1)
+<Question: ¿Cual es el mejor curso de platzi?>
+>>> Question.objects.get(pk=2)
+<Question: ¿Quien es el mejor profesor de platzi?>
+>>> Question.objects.get(pk=3)
+<Question: ¿Cual es la mejor escuela de platzi?>
+>>> 
+
+
+para obtener una busqueda con varios elementos
+
+>>> Question.objects.filter(pk=1)
+
+
+crear respuestas
+>> from polls.models import Question, Choice
+>>> q = Question.objects.get(pk=1)
+>>> q
+<Question: ¿Cual es el mejor curso de platzi?>
+>>> q.choice_set.all()
+<QuerySet [<Choice: Curso Basico de Python>]>
+>>> q.choice_set.create(choice_text="curso de fundamentos de ingeneiria",votes=0)
+<Choice: curso de fundamentos de ingeneiria>
+>>> q.choice_set.create(choice_text="curso de elixir",votes=0)
+<Choice: curso de elixir>
+>>> q.choice_set.all()
+<QuerySet [<Choice: Curso Basico de Python>, <Choice: curso de fundamentos de ingeneiria>, <Choice: curso de elixir>]>
+>>> 
