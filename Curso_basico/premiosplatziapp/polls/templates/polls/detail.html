@@ -7,11 +7,43 @@
     <title>Detalles</title>
 </head>
 <body>
-    <h1>{{question.question_text}}</h1>
+    {% comment %} accion que se haga cada que se envie el formulario {% endcomment %}
+    <form action="{% url "polls:vote" question.id %}" method="post">
+        {% comment %} linea de codigo protegernos de ataque  {% endcomment %}
+        {% csrf_token %}
+        <fieldset>
+            <legend>
+                <h1>{{ question.question_text }}</h1></legend>
+                {% if error_message %}
+                    <p><strong>{{ error_message }}</strong></p>
+                {% endif %}
+                {% for choices in question.choice_set.all  %}
+                    <input 
+                        type="radio"
+                        name="choice"
+                        {% comment %} autoenumeren las respuestas {% endcomment %}
+                        id="choice{{ forloop.counter }}"
+                        {% comment %} atributo de la base de datos {% endcomment %}
+                        value="{{choice.id}}"
+                        >
+                        <label for="choices{{ forloop.counter }}">
+                            {{ choices.choice_text }}
+                        </label>
+                        <br>
+                {% endfor %}       
+        </fieldset>
+        <input type="submit" value="votar">
+    </form>
+
+
+
+
+
+    {% comment %} <h1>{{question.question_text}}</h1>
     <ul>
         {% for choices in question.choice_set.all  %}
             <li>{{choices.choice_text}}</li>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
     </ul>
 </body>
 </html>
