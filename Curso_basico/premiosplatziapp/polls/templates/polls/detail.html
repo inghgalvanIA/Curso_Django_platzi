@@ -24,7 +24,7 @@
                         {% comment %} autoenumeren las respuestas {% endcomment %}
                         id="choice{{ forloop.counter }}"
                         {% comment %} atributo de la base de datos {% endcomment %}
-                        value="{{choice.id}}"
+                        value="{{choices.id}}"
                         >
                         <label for="choices{{ forloop.counter }}">
                             {{ choices.choice_text }}
